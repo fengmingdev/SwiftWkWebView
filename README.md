@@ -126,6 +126,6 @@ navigationController?.pushViewController(webView, animated: true)
     </tr>
 </table>
 
-![Aaron Swartz](https://github.com/XFIOSXiaoFeng/SwiftWkWebView/blob/master/demo.png)
+![Aaron Swartz](https://github.com/XFIOSXiaoFeng/SwiftWkWebView/blob/master/demo.jpeg)
 
 
