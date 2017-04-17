@@ -60,13 +60,13 @@ func run_JavaScript(script:String?) {}
 API代理方法
 ```
 //点击右边按钮执行方法
-@objc optional func didSelectRightItem(itemTag:String)
-
+@objc optional func didSelectRightItem(webView:WKWebView,itemTag:String)
+    
 //注册JS执行代码
-@objc optional func didAddScriptMessage(message:WKScriptMessage)
-
+@objc optional func didAddScriptMessage(webView:WKWebView,message:WKScriptMessage)
+    
 //页面执行JS方法
-@objc optional func didRunJavaScript(result:Any?, error:Error?)
+@objc optional func didRunJavaScript(webView:WKWebView,result:Any?,error:Error?)
 
 ```
 ### API使用方法
@@ -125,7 +125,7 @@ navigationController?.pushViewController(webView, animated: true)
         <td>单引号</td>
     </tr>
 </table>
-
-![Aaron Swartz](https://github.com/XFIOSXiaoFeng/SwiftWkWebView/blob/master/demo.jpeg)
+![Aaron Swartz](https://github.com/XFIOSXiaoFeng/SwiftWkWebView/blob/master/demo2.png)
+![Aaron Swartz](https://github.com/XFIOSXiaoFeng/SwiftWkWebView/blob/master/demo.gif)
 
 

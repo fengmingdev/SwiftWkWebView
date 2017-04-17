@@ -22,18 +22,18 @@ enum WkWebLoadType{
 @objc protocol WKWebViewDelegate:class {
     
     //点击右边按钮执行方法
-    @objc optional func didSelectRightItem(itemTag:String)
+    @objc optional func didSelectRightItem(webView:WKWebView,itemTag:String)
     
     //注册JS执行代码
-    @objc optional func didAddScriptMessage(message:WKScriptMessage)
+    @objc optional func didAddScriptMessage(webView:WKWebView,message:WKScriptMessage)
     
     //页面执行JS方法
-    @objc optional func didRunJavaScript(result:Any?, error:Error?)
+    @objc optional func didRunJavaScript(webView:WKWebView,result:Any?,error:Error?)
 }
 
 class WKWebViewController: UIViewController{
     
-    //设置navigationBarColor的颜色
+    //设置navigationBarColor的颜色(默认白色)
     var navigationBarColor: UIColor?
     
     //是否隐藏进度条
@@ -212,7 +212,7 @@ extension WKWebViewController{
         if javaScript == "" { return }
         
         webView.evaluateJavaScript(javaScript) { (result, error) in
-            self.delegate?.didRunJavaScript!(result: result, error: error)
+            self.delegate?.didRunJavaScript!(webView: self.webView, result: result, error: error)
         }
     }
     
@@ -381,7 +381,7 @@ extension WKWebViewController{
     }
     
     func rightItemClick() {
-        self.delegate?.didSelectRightItem!(itemTag: rightBarButtonItemTag ?? "")
+        self.delegate?.didSelectRightItem!(webView: webView, itemTag: rightBarButtonItemTag ?? "")
     }
     
 }
@@ -394,7 +394,7 @@ extension WKWebViewController: WKScriptMessageHandler{
         
         for _ in addJavaScriptAry.enumerated() {
             
-             self.delegate?.didAddScriptMessage!(message: message)
+             self.delegate?.didAddScriptMessage!(webView: webView, message: message)
         }
     }
 }
@@ -526,7 +526,7 @@ extension UIBarButtonItem {
     /// - parameter action:   action
     ///
     /// - returns: UIBarButtonItem
-    convenience init(title: String?,image:String?,imageH:String? ,target: AnyObject?, action: Selector) {
+    fileprivate convenience init(title: String?,image:String?,imageH:String? ,target: AnyObject?, action: Selector) {
         
         let backItemImage = UIImage.init(named: image ?? "")
         let backItemHlImage = UIImage.init(named: imageH ?? "")
@@ -562,7 +562,7 @@ extension UINavigationController {
         }
     }
     
-    func setBackgroundColor(_ color: UIColor, alpha: CGFloat) {
+    fileprivate func setBackgroundColor(_ color: UIColor, alpha: CGFloat) {
         
         if alphaView == nil {
             alphaView = UIView(frame: CGRect(x: 0.0, y: -20.0, width: UIScreen.main.bounds.width, height: 64.0))
@@ -576,7 +576,7 @@ extension UINavigationController {
     }
     
     //设置bar的颜色/去除分割线
-    func setBarBackgroundColor(_ color: UIColor) {
+    fileprivate func setBarBackgroundColor(_ color: UIColor) {
         let image = creatImageWithColor(color: color)
         navigationBar.shadowImage = image
         navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
@@ -586,7 +586,7 @@ extension UINavigationController {
 //颜色转图片
 extension NSObject{
     
-    func creatImageWithColor(color:UIColor)->UIImage{
+    fileprivate func creatImageWithColor(color:UIColor)->UIImage{
         let rect = CGRect.init(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()

@@ -28,14 +28,22 @@ extension ViewController {
         case 0:
             
             let webView = WKWebViewController()
-            webView.load_UrlSting(string: "https://www.baidu.com")
+            webView.rightBarButtonItemTitle = "刷新"
+            webView.rightBarButtonItemTag = "road"
+            webView.delegate = self
+            
+            webView.load_UrlSting(string: "http://www.myei.cc/play/24892/1/35.html")
             navigationController?.pushViewController(webView, animated: true)
             
         case 1:
+            
             let webView = WKWebViewController()
+            
             webView.load_HTMLSting(string: "test")
             webView.addJavaScriptAry = ["valueName"]
+            
             webView.add_rightBarButtonItem(title: "测试", image: nil, imageH: nil, itemTag: "right")
+            
             webView.delegate = self
             
             navigationController?.pushViewController(webView, animated: true)
@@ -57,15 +65,18 @@ extension ViewController {
 
 extension ViewController:WKWebViewDelegate{
 
-    func didSelectRightItem(itemTag: String) {
+    func didSelectRightItem(webView: WKWebView, itemTag: String) {
         print("点击了右边按钮")
+        if itemTag == "road" {
+            webView.reload()
+        }
     }
     
-    func didRunJavaScript(result: Any?, error: Error?) {
+    func didRunJavaScript(webView: WKWebView, result: Any?, error: Error?) {
         print("执行JS结果")
     }
     
-    func didAddScriptMessage(message: WKScriptMessage) {
+    func didAddScriptMessage(webView: WKWebView, message: WKScriptMessage) {
         print("=====\(message.body)")
     }
 }
