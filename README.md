@@ -15,6 +15,8 @@ HTTPS权限:
 ```
 ### API介绍
 
+![Aaron Swartz](https://github.com/XFIOSXiaoFeng/SwiftWkWebView/blob/master/demo2.png)
+
 API属性
 ```
 //设置navigationBarColor的颜色
@@ -125,7 +127,7 @@ navigationController?.pushViewController(webView, animated: true)
         <td>单引号</td>
     </tr>
 </table>
-![Aaron Swartz](https://github.com/XFIOSXiaoFeng/SwiftWkWebView/blob/master/demo2.png)
+
 ![Aaron Swartz](https://github.com/XFIOSXiaoFeng/SwiftWkWebView/blob/master/demo.gif)
 
 
