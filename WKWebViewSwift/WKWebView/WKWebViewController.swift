@@ -12,6 +12,10 @@ import UIKit
 import WebKit
 
 
+/// 屏幕宽高
+let ScreenW = UIScreen.main.bounds.size.width
+let ScreenH = UIScreen.main.bounds.size.height
+
 //网页加载类型
 enum WkWebLoadType{
     case loadWebURLString
@@ -38,12 +42,17 @@ class WKWebViewController: UIViewController{
     
     //是否隐藏进度条
     var isProgressHidden = false
-
+    
+    //显示滚动条
+    var isScrollShow = false
+    
     //注册MessageHandler 需要实现代理方法
     var addJavaScriptAry = [String]()
     
     //执行JS 需要实现代理方法
     var javaScript = String()
+    
+    var frame = CGRect.init(x: 0, y: 64, width: ScreenW, height: ScreenH - 64)
     
     //设置代理
     weak var delegate : WKWebViewDelegate?
@@ -238,13 +247,16 @@ extension WKWebViewController{
         for index in addJavaScriptAry.enumerated() {
             configuretion.userContentController.add(self, name: index.element)
         }
-        webView = WKWebView(frame:CGRect.init(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height - 64), configuration: configuretion)
+        webView = WKWebView(frame:frame,configuration: configuretion)
         
         //开启手势交互
         webView.allowsBackForwardNavigationGestures = true
 
-        webView?.navigationDelegate = self
+        //滚动条
+        webView.scrollView.showsVerticalScrollIndicator = isScrollShow
+        webView.scrollView.showsHorizontalScrollIndicator = isScrollShow
         
+        webView?.navigationDelegate = self
         webView?.uiDelegate = self
         
         // 监听支持KVO的属性
@@ -259,12 +271,15 @@ extension WKWebViewController{
     fileprivate func addProgressView() {
         
         progressView = UIProgressView(progressViewStyle: .default)
-        progressView?.frame = CGRect(x: 0, y: 64, width: view.bounds.width, height: 3)
+        progressView?.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 3)
         progressView?.trackTintColor = UIColor.clear
         progressView?.progressTintColor = UIColor.green
-        progressView?.isHidden = isProgressHidden
+//        progressView?.isHidden = isProgressHidden 好尴尬  不生效
+        if isProgressHidden == false {
+            view.addSubview(progressView!)
+        }
         
-        view.addSubview(progressView!)
+        webView.addSubview(progressView!)
     }
     
     //视图即将消失的时候调用该方法
@@ -405,6 +420,19 @@ extension WKWebViewController: WKNavigationDelegate{
     //服务器开始请求的时候调用
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
+        //拨打电话
+        //兼容安卓的服务器写法:<a class = "mobile" href = "tel://电话号码"></a>
+        //或者:<a class = "mobile" href = "tel:电话号码"></a>
+        var mobileUrl = navigationAction.request.url?.absoluteString
+        mobileUrl = mobileUrl?.removingPercentEncoding
+        if mobileUrl != nil {
+            if mobileUrl!.hasPrefix("tel") {
+                //取消WKWebView 打电话请求
+                decisionHandler(.cancel);
+                //用openURL 这个API打电话
+                UIApplication.shared.openURL(URL.init(string: mobileUrl!)!)
+            }
+        }
         switch navigationAction.navigationType {
         case WKNavigationType.linkActivated:
             pushCurrentSnapshotView(navigationAction.request as NSURLRequest)
