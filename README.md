@@ -21,7 +21,7 @@ HTTPS权限:
  var str = "Hello, Wellcome Swift Advanced"
  print("\(str)"+"\n")
 
- //定义一个数组
+ // 定义一个数组
  var arr = [1,2,4,6,9]
 
  // map:转换 (按自己的意淫方式转换成一个新的数组数组)
