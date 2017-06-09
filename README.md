@@ -13,37 +13,33 @@ HTTPS权限:
 <true/>
 </dict>
 ```
-##### 安利一波swift高阶语法
-粘贴到playground你会看到不一样的奇迹
+##### 安利一波swift高阶函数
+打开swift高阶函数.playground你会看到不一样的奇迹
 ```
- import UIKit
+// 定义一个数组
+var arr = [1,2,4,6,9]
 
- var str = "Hello, Wellcome Swift Advanced"
- print("\(str)"+"\n")
+// map:转换 (按自己的意淫方式转换成一个新的数组数组)
+print("\(arr.map({"我是用map转换得到的新数组===>\($0)"}))" + "\n")
 
- // 定义一个数组
- var arr = [1,2,4,6,9]
+// filter:筛选 (根据条件筛选数组已有的值,返回筛选过后的值)
+print("\(arr.filter { $0 % 2 == 0 })" + "\n")
 
- // map:转换 (按自己的意淫方式转换成一个新的数组数组)
- print("\(arr.map({"我是用map转换得到的新数组===>\($0)"}))" + "\n")
+// flatMap:筛选(根据条件筛选数组已有的值,返回筛选的布尔值)
+print("\(arr.flatMap { $0 % 2 == 0 })" + "\n")
 
- // filter:筛选 (根据条件筛选数组已有的值,返回筛选过后的值)
- print("\(arr.filter { $0 % 2 == 0 })" + "\n")
+// 集合操作 (字典)
+var dict = ["userinfo":"yasuo","age":"18","higeht":"165"]
 
- // flatMap:筛选(根据条件筛选数组已有的值,返回筛选的布尔值)
- print("\(arr.flatMap { $0 % 2 == 0 })" + "\n")
+// 给每一个key，value前后加上一个“
+var dictMap = dict.map ({"\"\($0.key)\":\"\($0.value)\""})
 
- // 集合操作 (字典)
- var dict = ["userinfo":"yasuo","age":"18","higeht":"165"]
+// 转换结果
+print("\(dictMap.map({"\($0)"}))" + "\n")
 
- // 给每一个key，value前面加上一个\
- var dictMap = dict.map ({"\\\($0.key)\\\($0.value)"})
+// 转换成字符串
+print(dictMap.joined(separator: ","))
 
- // 转换结果
- print("\(dictMap.map({"\($0)"}))" + "\n")
-
- // 转换成字符串
- print(dictMap.joined())
 ```
 ### API介绍
 
@@ -82,8 +78,8 @@ func load_UrlSting(string:String!) {}
 /// 加载本地HTML
 func load_HTMLSting(string:String!) {}
 
-/// POST方式请求加载
-func load_POSTUrlSting(string:String!,postString:String!) {}
+/// 优雅的POST方式请求加载
+func load_POSTUrlSting(string:String!,postString:[String:Any]!) {}
 
 /// 添加右侧按钮
 func add_rightBarButtonItem(title:String?,image:String?,imageH:String?,itemTag:String?) {}
@@ -124,9 +120,10 @@ navigationController?.pushViewController(webView, animated: true)
 ```
 let webView = WKWebViewController()
 let url = "https://www.xxxxxx.com"
-let postData = "\"username\":\"aaa\",\"password\":\"123\""
-webView.load_POSTUrlSting(string: url, postString: postData)
+let postDict = ["user":"xiaofeng","age":24,"hight":166] as [String : Any]
+webView.load_POSTUrlSting(string: url, postString: postDict)
 navigationController?.pushViewController(webView, animated: true)
+
 ```
 附：swift3.0以后常见转义字符
 <table>

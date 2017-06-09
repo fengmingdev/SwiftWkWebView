@@ -52,9 +52,10 @@ extension ViewController {
             let webView = WKWebViewController()
             
             let url = "https://www.xxxxxx.com"
-            let postData = "\"username\":\"aaa\",\"password\":\"123\""
+            
+            let postDict = ["user":"xiaofeng","age":24,"hight":166] as [String : Any]
 
-            webView.load_POSTUrlSting(string: url, postString: postData)
+            webView.load_POSTUrlSting(string: url, postString: postDict)
             navigationController?.pushViewController(webView, animated: true)
             
         default:break

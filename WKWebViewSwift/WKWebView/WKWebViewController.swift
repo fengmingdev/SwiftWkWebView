@@ -54,6 +54,10 @@ class WKWebViewController: UIViewController{
     
     var frame = CGRect.init(x: 0, y: 64, width: ScreenW, height: ScreenH - 64)
     
+    //是否显示导航栏
+    var isNavigtionHiden = false
+    
+    
     //设置代理
     weak var delegate : WKWebViewDelegate?
     
@@ -104,10 +108,18 @@ class WKWebViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.isNavigationBarHidden = false
+        navigationController?.isNavigationBarHidden = isNavigtionHiden
         navigationController?.setBarBackgroundColor(navigationBarColor ?? UIColor.white)
     }
-    
+    //视图即将消失的时候调用该方法
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        webView.configuration.userContentController .removeScriptMessageHandler(forName: "AppModel")
+        webView.navigationDelegate = nil;
+        webView.uiDelegate = nil;
+        
+    }
 
 //MARK:- 懒加载控件
     
@@ -157,11 +169,17 @@ extension WKWebViewController{
     ///
     /// urlString: post请求的url字符串
     /// postString: post参数体 详情请搜索swift/oc转义字符（注意格式："\"username\":\"aaa\",\"password\":\"123\""）
-    func load_POSTUrlSting(string:String!,postString:String!) {
+    func load_POSTUrlSting(string:String!,postString:[String:Any]!) {
+        
+        // 给每一个key，value前后加上一个“
+        let dictMap = postString.map ({"\"\($0.key)\":\"\($0.value)\""})
         
         loadWebType = .POSTWebURLString
         urltring = string
-        javaScript = "post('\(string!)', {\(postString!)});"
+        javaScript = "post('\(string!)', {\(dictMap.joined(separator: ","))});"
+        
+        print(javaScript)
+        
     }
     
     /// 添加右侧按钮
@@ -282,12 +300,7 @@ extension WKWebViewController{
         webView.addSubview(progressView!)
     }
     
-    //视图即将消失的时候调用该方法
-    override func viewDidDisappear(_ animated: Bool) {
-        webView.configuration.userContentController .removeScriptMessageHandler(forName: "AppModel")
-        webView.navigationDelegate = nil;
-        webView.uiDelegate = nil;
-    }
+    
     
     //自定义左边按钮
     @objc fileprivate func customBackItemClicked() {
