@@ -506,6 +506,15 @@ extension WKWebViewController: WKNavigationDelegate{
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print(#function)
     }
+    
+    // 打开新窗口委托
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        
+        if navigationAction.targetFrame?.isMainFrame == nil {
+            webView.load(navigationAction.request)
+        }
+        return nil
+    }
 }
 
 // MARK: - WKUIDelegate 不实现该代理方法 网页内调用弹窗时会抛出异常,导致程序崩溃

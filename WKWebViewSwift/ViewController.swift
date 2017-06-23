@@ -32,7 +32,7 @@ extension ViewController {
             webView.rightBarButtonItemTag = "road"
             webView.delegate = self
             
-            webView.load_UrlSting(string: "http://www.myei.cc/play/24892/1/35.html")
+            webView.load_UrlSting(string: "https://www.baidu.com")
             navigationController?.pushViewController(webView, animated: true)
             
         case 1:
