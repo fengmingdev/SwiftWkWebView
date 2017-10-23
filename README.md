@@ -48,7 +48,7 @@ public var progressTrackTintColor:UIColor = UIColor.clear
 /// 加载颜色
 public var progressTintColor:UIColor = UIColor.green
 ```
-###加载方式
+### 加载方式
 ```
 /// 加载普通URL
 case URLString(url:String)
@@ -60,7 +60,7 @@ case HTMLName(name:String)
 case POST(url:String,parameters: [String:Any])
 
 ```
-代理方法方法
+### 代理方法方法
 ```
 /// 服务器开始请求的时候调用
 @objc optional func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
