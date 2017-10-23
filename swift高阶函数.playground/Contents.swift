@@ -19,7 +19,7 @@ print("\(arr.filter { $0 % 2 == 0 })" + "\n")
 print("\(arr.flatMap { $0 % 2 == 0 })" + "\n")
 
 // 集合操作 (字典)
-var dict = ["userinfo":"yasuo","age":"18","higeht":"165"]
+var dict:[String:Any] = ["userinfo":"yasuo","age":"18","higeht":"165"]
 
 // 给每一个key，value前后加上一个“
 var dictMap = dict.map ({"\"\($0.key)\":\"\($0.value)\""})

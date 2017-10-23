@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A6C51AC1E9B764000B16593 /* backItemImage_hl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C51A81E9B764000B16593 /* backItemImage_hl@2x.png */; };
-		3A6C51AD1E9B764000B16593 /* backItemImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C51A91E9B764000B16593 /* backItemImage@2x.png */; };
-		3A6C51AE1E9B764000B16593 /* closeItemImage_hl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C51AA1E9B764000B16593 /* closeItemImage_hl@2x.png */; };
-		3A6C51AF1E9B764000B16593 /* closeItemImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C51AB1E9B764000B16593 /* closeItemImage@2x.png */; };
 		3AE0BCB01E1D57920013055C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0BCAF1E1D57920013055C /* AppDelegate.swift */; };
 		3AE0BCB21E1D57920013055C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0BCB11E1D57920013055C /* ViewController.swift */; };
 		3AE0BCB51E1D57920013055C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE0BCB31E1D57920013055C /* Main.storyboard */; };
@@ -19,8 +15,12 @@
 		3AE0BCC51E1D57920013055C /* WKWebViewSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0BCC41E1D57920013055C /* WKWebViewSwiftTests.swift */; };
 		3AE0BCD01E1D57920013055C /* WKWebViewSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0BCCF1E1D57920013055C /* WKWebViewSwiftUITests.swift */; };
 		3AE0BCF71E1D5C3B0013055C /* WKJSPOST.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AE0BCF31E1D5C3B0013055C /* WKJSPOST.html */; };
-		3AE0BCF81E1D5C3B0013055C /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0BCF41E1D5C3B0013055C /* WKWebViewController.swift */; };
 		3AE6FC981E9CC108005C1021 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 3AE6FC971E9CC108005C1021 /* test.html */; };
+		CE01CC401F99D8890048D686 /* WkwebViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01CC3F1F99D8890048D686 /* WkwebViewConfig.swift */; };
+		CE01CC421F99E3A40048D686 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE01CC411F99E3A40048D686 /* WebView.swift */; };
+		CECCB01D1F9A411500A4DA82 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECCB01C1F9A411500A4DA82 /* Extension+UIView.swift */; };
+		CEF9533B1F998E5B005B00D1 /* Extension+UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF9533A1F998E5B005B00D1 /* Extension+UIBarButtonItem.swift */; };
+		CEF9533F1F99B9F9005B00D1 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF9533E1F99B9F9005B00D1 /* Extension+String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,10 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3A6C51A81E9B764000B16593 /* backItemImage_hl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backItemImage_hl@2x.png"; sourceTree = "<group>"; };
-		3A6C51A91E9B764000B16593 /* backItemImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backItemImage@2x.png"; sourceTree = "<group>"; };
-		3A6C51AA1E9B764000B16593 /* closeItemImage_hl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeItemImage_hl@2x.png"; sourceTree = "<group>"; };
-		3A6C51AB1E9B764000B16593 /* closeItemImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeItemImage@2x.png"; sourceTree = "<group>"; };
 		3AE0BCAC1E1D57920013055C /* WKWebViewSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKWebViewSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE0BCAF1E1D57920013055C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AE0BCB11E1D57920013055C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,8 +55,12 @@
 		3AE0BCCF1E1D57920013055C /* WKWebViewSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewSwiftUITests.swift; sourceTree = "<group>"; };
 		3AE0BCD11E1D57920013055C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AE0BCF31E1D5C3B0013055C /* WKJSPOST.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = WKJSPOST.html; sourceTree = "<group>"; };
-		3AE0BCF41E1D5C3B0013055C /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		3AE6FC971E9CC108005C1021 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		CE01CC3F1F99D8890048D686 /* WkwebViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WkwebViewConfig.swift; sourceTree = "<group>"; };
+		CE01CC411F99E3A40048D686 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		CECCB01C1F9A411500A4DA82 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		CEF9533A1F998E5B005B00D1 /* Extension+UIBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIBarButtonItem.swift"; sourceTree = "<group>"; };
+		CEF9533E1F99B9F9005B00D1 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,9 +113,12 @@
 			children = (
 				3AE0BCF01E1D5C3B0013055C /* WKWebView */,
 				3AE0BCAF1E1D57920013055C /* AppDelegate.swift */,
+				CEF9533A1F998E5B005B00D1 /* Extension+UIBarButtonItem.swift */,
+				CEF9533E1F99B9F9005B00D1 /* Extension+String.swift */,
+				CECCB01C1F9A411500A4DA82 /* Extension+UIView.swift */,
 				3AE0BCB11E1D57920013055C /* ViewController.swift */,
-				3AE6FC971E9CC108005C1021 /* test.html */,
 				3AE0BCB31E1D57920013055C /* Main.storyboard */,
+				3AE6FC971E9CC108005C1021 /* test.html */,
 				3AE0BCB61E1D57920013055C /* Assets.xcassets */,
 				3AE0BCB81E1D57920013055C /* LaunchScreen.storyboard */,
 				3AE0BCBB1E1D57920013055C /* Info.plist */,
@@ -144,12 +147,9 @@
 		3AE0BCF01E1D5C3B0013055C /* WKWebView */ = {
 			isa = PBXGroup;
 			children = (
-				3A6C51A81E9B764000B16593 /* backItemImage_hl@2x.png */,
-				3A6C51A91E9B764000B16593 /* backItemImage@2x.png */,
-				3A6C51AA1E9B764000B16593 /* closeItemImage_hl@2x.png */,
-				3A6C51AB1E9B764000B16593 /* closeItemImage@2x.png */,
+				CE01CC411F99E3A40048D686 /* WebView.swift */,
 				3AE0BCF31E1D5C3B0013055C /* WKJSPOST.html */,
-				3AE0BCF41E1D5C3B0013055C /* WKWebViewController.swift */,
+				CE01CC3F1F99D8890048D686 /* WkwebViewConfig.swift */,
 			);
 			path = WKWebView;
 			sourceTree = "<group>";
@@ -222,7 +222,6 @@
 				TargetAttributes = {
 					3AE0BCAB1E1D57920013055C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 78933RXJ3U;
 						ProvisioningStyle = Automatic;
 					};
 					3AE0BCBF1E1D57920013055C = {
@@ -265,12 +264,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AE0BCBA1E1D57920013055C /* LaunchScreen.storyboard in Resources */,
-				3A6C51AC1E9B764000B16593 /* backItemImage_hl@2x.png in Resources */,
-				3A6C51AF1E9B764000B16593 /* closeItemImage@2x.png in Resources */,
-				3A6C51AD1E9B764000B16593 /* backItemImage@2x.png in Resources */,
 				3AE0BCB71E1D57920013055C /* Assets.xcassets in Resources */,
 				3AE0BCB51E1D57920013055C /* Main.storyboard in Resources */,
-				3A6C51AE1E9B764000B16593 /* closeItemImage_hl@2x.png in Resources */,
 				3AE0BCF71E1D5C3B0013055C /* WKJSPOST.html in Resources */,
 				3AE6FC981E9CC108005C1021 /* test.html in Resources */,
 			);
@@ -297,9 +292,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AE0BCF81E1D5C3B0013055C /* WKWebViewController.swift in Sources */,
 				3AE0BCB21E1D57920013055C /* ViewController.swift in Sources */,
+				CEF9533B1F998E5B005B00D1 /* Extension+UIBarButtonItem.swift in Sources */,
+				CECCB01D1F9A411500A4DA82 /* Extension+UIView.swift in Sources */,
+				CEF9533F1F99B9F9005B00D1 /* Extension+String.swift in Sources */,
+				CE01CC421F99E3A40048D686 /* WebView.swift in Sources */,
 				3AE0BCB01E1D57920013055C /* AppDelegate.swift in Sources */,
+				CE01CC401F99D8890048D686 /* WkwebViewConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,7 +393,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -438,7 +437,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -451,11 +450,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 78933RXJ3U;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WKWebViewSwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiaofeng.WKWebViewSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiaofeng.webkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -465,11 +463,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 78933RXJ3U;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = WKWebViewSwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiaofeng.WKWebViewSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiaofeng.webkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
