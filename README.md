@@ -13,7 +13,6 @@ HTTPS权限:
 <true/>
 </dict>
 ```
-##### 安利一波swift高阶函数
 
 ### API介绍
 ```
@@ -49,7 +48,7 @@ public var progressTrackTintColor:UIColor = UIColor.clear
 /// 加载颜色
 public var progressTintColor:UIColor = UIColor.green
 ```
-加载方式
+###加载方式
 ```
 /// 加载普通URL
 case URLString(url:String)
