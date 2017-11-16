@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         config.isShowScrollIndicator = false
         config.isProgressHidden = false
         
+        webView.delegate = self
         
         // 加载普通URL
         webView.webConfig = config
@@ -56,4 +57,7 @@ extension ViewController:WKWebViewDelegate{
         print(message.body)
     }
     
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        print("开始加载")
+    }
 }

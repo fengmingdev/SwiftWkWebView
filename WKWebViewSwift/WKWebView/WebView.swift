@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 @IBDesignable
-open class WebView: UIView {
+class WebView: UIView {
     
     /// 事件
     fileprivate var target: AnyObject?
@@ -41,21 +41,14 @@ open class WebView: UIView {
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        configure()
     }
     open override func layoutSubviews() {
         super.layoutSubviews()
         webView.frame = CGRect(x: 0, y: 0, width: self.width, height: self.height)
-    }
-    
-    fileprivate func configure() {
-        webView.navigationDelegate = self
-        webView.uiDelegate = self
     }
     
     fileprivate func setupUI(webConfig:WkwebViewConfig)  {
@@ -88,6 +81,9 @@ open class WebView: UIView {
         progressView.progressTintColor = webConfig.progressTintColor
         webView.addSubview(progressView)
         progressView.isHidden = webConfig.isProgressHidden
+        
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
     }
     
     /// 加载webView
@@ -132,7 +128,7 @@ open class WebView: UIView {
         if let javaScript = javaScript {
             webView.evaluateJavaScript(javaScript) { result,error in
                 print(error ?? "")
-                self.delegate?.webViewEvaluateJavaScript!(result, error: error)
+                self.delegate?.webViewEvaluateJavaScript(result, error: error)
             }
         }
     }
@@ -196,9 +192,9 @@ open class WebView: UIView {
 // MARK: - WKScriptMessageHandler
 extension WebView: WKScriptMessageHandler{
     
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let scriptMessage = webConfig?.scriptMessageHandlerArray {
-            self.delegate?.webViewUserContentController!(scriptMessage, didReceive: message)
+            self.delegate?.webViewUserContentController(scriptMessage, didReceive: message)
         }
     }
 }
@@ -206,8 +202,8 @@ extension WebView: WKScriptMessageHandler{
 extension WebView: WKNavigationDelegate{
     
     //服务器开始请求的时候调用
-    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        delegate?.webView!(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        self.delegate?.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
         
         let navigationURL = navigationAction.request.url?.absoluteString
         if let requestURL = navigationURL?.removingPercentEncoding {
@@ -226,7 +222,7 @@ extension WebView: WKNavigationDelegate{
             if requestURL.hasPrefix("alipay://") {
                 
                 var urlString = requestURL.mySubString(from: 23)
-                urlString = urlString.replacingOccurrences(of: "alipays", with: "zhianjia")
+                urlString = urlString.replacingOccurrences(of: "alipays", with: webConfig!.aliPayScheme)
                 
                 if let strEncoding = urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
                     
@@ -265,13 +261,13 @@ extension WebView: WKNavigationDelegate{
     }
     
     //开始加载
-    public func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        delegate?.webView!(webView, didStartProvisionalNavigation: navigation)
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        self.delegate?.webView(webView, didStartProvisionalNavigation: navigation)
     }
     
     //这个是网页加载完成，导航的变化
-    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        delegate?.webView!(webView, didFinish: navigation)
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.delegate?.webView(webView, didFinish: navigation)
         // 判断是否需要加载（仅在第一次加载）
         if needLoadJSPOST == true {
             // 调用使用JS发送POST请求的方法
@@ -282,19 +278,19 @@ extension WebView: WKNavigationDelegate{
     }
     
     //跳转失败的时候调用
-    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        delegate?.webView!(webView, didFail: navigation, withError: error)
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        self.delegate?.webView(webView, didFail: navigation, withError: error)
         print(error)
     }
     // 内容加载失败时候调用
-    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        delegate?.webView!(webView, didFailProvisionalNavigation: navigation, withError: error)
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        self.delegate?.webView(webView, didFailProvisionalNavigation: navigation, withError: error)
         progressView.isHidden = true
         print(error)
     }
     
     // 打开新窗口委托
-    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if navigationAction.targetFrame?.isMainFrame == nil {
             webView.load(navigationAction.request)
         }
@@ -306,7 +302,7 @@ extension WebView: WKNavigationDelegate{
 extension WebView: WKUIDelegate{
     
     // 获取js 里面的提示
-    public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         
         let alert = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (_) -> Void in
@@ -319,7 +315,7 @@ extension WebView: WKUIDelegate{
     }
     
     // js 信息的交流
-    public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         
         let alert = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (_) -> Void in
@@ -332,7 +328,7 @@ extension WebView: WKUIDelegate{
     }
     
     // 交互。可输入的文本。
-    public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
+    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
         
         let alert = UIAlertController(title: prompt, message: defaultText, preferredStyle: .alert)
         

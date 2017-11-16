@@ -43,6 +43,9 @@ struct WkwebViewConfig {
     /// 加载颜色
     public var progressTintColor:UIColor = UIColor.green
     
+    /// 配置支付宝支付成功返回指定APPScheme
+    public var aliPayScheme:String = "zhianjia"
+    
 }
 //网页加载类型
 enum WkwebLoadType{
@@ -57,26 +60,50 @@ enum WkwebLoadType{
     case POST(url:String,parameters: [String:Any])
 }
 
-@objc protocol WKWebViewDelegate:class {
+protocol WKWebViewDelegate:class {
     
     /// 服务器开始请求的时候调用
-    @objc optional func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void)
     
     /// 页面开始加载
-    @objc optional func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!)
-
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!)
+    
     /// 页面加载完成
-    @objc optional func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!)
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!)
     
     /// 跳转失败的时候调用
-    @objc optional func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error)
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error)
     
     /// 内容加载失败
-    @objc optional func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)
     
     /// 执行JS注入方法
-    @objc optional func webViewUserContentController(_ scriptMessageHandlerArray:[String], didReceive message: WKScriptMessage)
+    func webViewUserContentController(_ scriptMessageHandlerArray:[String], didReceive message: WKScriptMessage)
     
     /// JS执行回调方法
-    @objc optional func webViewEvaluateJavaScript(_ result:Any?,error:Error?)
+    func webViewEvaluateJavaScript(_ result:Any?,error:Error?)
 }
+
+extension WKWebViewDelegate {
+    /// 服务器开始请求的时候调用
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void){}
+    
+    /// 页面开始加载
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){}
+    
+    /// 页面加载完成
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){}
+    
+    /// 跳转失败的时候调用
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error){}
+    
+    /// 内容加载失败
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error){}
+    
+    /// 执行JS注入方法
+    func webViewUserContentController(_ scriptMessageHandlerArray:[String], didReceive message: WKScriptMessage){}
+    
+    /// JS执行回调方法
+    func webViewEvaluateJavaScript(_ result:Any?,error:Error?){}
+}
+
