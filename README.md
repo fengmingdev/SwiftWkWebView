@@ -2,7 +2,7 @@
 WKWebView 支持SB/xib直接拖拽 支持POST请求 加载本地页面 直接加载网页 JS交互 集成支付宝URL支付功能  微信URL支付带有识之士来补上
 
 #### 感谢大家的支持 OC版本将不再持续更新  业余爱好 QQ群：384089763
-OC版本遗址：https://github.com/My-Old-Driver/WKWebView
+OC版本遗址：https://github.com/fengmingdev/WKWebView
 
 NO1 首先得允许访问HTTP链接
 ```
